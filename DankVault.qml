@@ -379,7 +379,7 @@ QtObject {
                 var value = text.trim();
                 if (value.length > 0) {
                     Quickshell.execDetached(["sh", "-c",
-                        "printf '%s' \"$1\" | wl-copy --paste-once --sensitive; " +
+                        "printf '%s' \"$1\" | wl-copy --sensitive; " +
                         "(sleep 15 && wl-copy --clear) &",
                         "sh", value]);
                     if (typeof ToastService !== "undefined")

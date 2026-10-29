@@ -171,13 +171,21 @@ fi
 echo "clipboard security"
 
 # Verify the QML uses safe clipboard patterns
-if grep -q 'paste-once' DankVault.qml && grep -q 'sensitive' DankVault.qml; then
-    pass "uses --paste-once and --sensitive"
+if grep -q 'wl-copy --sensitive' DankVault.qml; then
+    pass "uses --sensitive"
 else
-    fail "clipboard" "missing paste-once or sensitive flags"
+    fail "clipboard" "missing sensitive flag"
 fi
 
-if grep -q 'sleep 15' DankVault.qml; then
+# --paste-once breaks pasting into browsers, which request the offer more
+# than once (wl-clipboard#107); rely on the timed clear instead.
+if grep -q 'paste-once' DankVault.qml; then
+    fail "clipboard" "uses --paste-once, which breaks pasting into browsers"
+else
+    pass "does not use --paste-once"
+fi
+
+if grep -q 'sleep 15 && wl-copy --clear' DankVault.qml; then
     pass "auto-clears after 15s"
 else
     fail "clipboard" "missing 15s auto-clear"

@@ -6,6 +6,8 @@ as its GitHub release notes.
 
 ## [Unreleased]
 
+- Fixed copied secrets failing to paste into browsers such as Firefox and Chromium: copying no longer uses `wl-copy --paste-once`, which breaks in those apps because they request the clipboard contents more than once: the first request used up the single paste, so nothing was pasted and the clipboard was cleared ([wl-clipboard#107](https://github.com/bugaevc/wl-clipboard/issues/107)). Secrets are still marked sensitive and cleared after 15 seconds, and can now be pasted more than once within that window.
+
 ## [0.4.1] - 2026-09-20
 
 - Added an optional development-build packaging path: running `scripts/package.py --output dist/dev` now stages a copy of the plugin stamped with an identifiable version like `X.Y.Z-dev.<commit>` (with a `.dirty` suffix for uncommitted changes), so builds installed from a checkout can be told apart from tagged releases. Release packaging still requires a clean checkout at the exact `vX.Y.Z` tag; the tracked `plugin.json` keeps the plain release version.

@@ -11,7 +11,7 @@ A launcher plugin for [DankMaterialShell](https://github.com/AvengeMedia/DankMat
 - Search vault entries by name, username, or folder
 - Copy password, username, or TOTP code to clipboard
 - Context menu for switching between credential fields
-- Secure clipboard: paste-once, sensitive flag, 15s auto-clear
+- Secure clipboard: sensitive flag, 15s auto-clear
 
 ## Installation
 
